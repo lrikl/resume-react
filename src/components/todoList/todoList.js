@@ -63,6 +63,11 @@ export default () => {
         const [hours, minute] = getCurrentTime();
         const day = getCurrentDay();
 
+        if (!inputValueTitle || !inputValue) {
+            alert("треба заповнити усі текстові поля!");
+            return;
+        }
+
         const newTask = {
             id: generateRandomId(),
             title: inputValueTitle.trim(),
@@ -70,11 +75,6 @@ export default () => {
             completed: false,
             time: `${day}: ${hours}:${minute}`
         };
-
-        if (!newTask.text || !newTask.title) {
-            alert("треба заповнити усі текстові поля!");
-            return;
-        }
 
         dispatch(setTodoTasksArr([...todoTasksArr, newTask]));
         dispatch(setInputValue(''));
@@ -191,7 +191,6 @@ export default () => {
                                         className="todo-input"
                                         value={inputHandleValueTitle}
                                         onChange={(e) => dispatch(setInputHandleValueTitle(e.target.value))}
-                                        onKeyDown={(e) => e.key === "Enter" && saveEdit(task.id)} 
                                     />
                                     <span className='edit-text-remark'>Текст:</span>
                                     <textarea
@@ -239,7 +238,6 @@ export default () => {
                             placeholder="Заголовок..."
                             value={inputValueTitle}
                             onChange={(e) => dispatch(setInputValueTitle(e.target.value))}
-                            onKeyDown={(e) => e.key === "Enter" && addTodo()} 
                         />
                         <textarea
                             type="text"
