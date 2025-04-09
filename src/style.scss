@@ -38,10 +38,6 @@ h1, h2 {
     font-weight: 900;
 }
 
-.main-content {
-    padding-top: clamp(16px, 4vw, 48px);
-}
-
 body.dark-theme {
     background-color: #333;
     --white-color: #333;
@@ -50,11 +46,18 @@ body.dark-theme {
     --blue-color: gray;
     --bg-gradient: gray;
 
+    .todo-block,
+    .timer-block  {
+        background: linear-gradient(rgba(255, 255, 255, 0.082), rgba(255, 255, 255, 0.082));
+        background-color: #121212;
+    }
+    
     .save-btn,
     .cancel-btn,
     .check-all,
     .delete-btn,
-    .btn-clear {
+    .btn-clear,
+    .add-btn {
         background-color: #000;
         color: #fff;
     }
@@ -69,13 +72,12 @@ body.dark-theme {
         border-color: #fff;
     }
 
-    .todo-block,
-    .timer-block {
-        background: #333;
-    }
-
     .todo-item {
         background: rgba(255, 255, 255, 0.1);
+    }
+
+    .check-bg {
+        background: rgba(255, 255, 255, 0.3);
     }
 
     .weather-btn,

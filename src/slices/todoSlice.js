@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const todoStateSlice = createSlice({
   name: 'todoState', 
   initialState: { 
-    todoTasksArr: [{id: "14752uz5j2o", title: "Заголовок", text: "текст...", completed: false, time: "05.05.2025: 15:55"}],
+    todoTasksArr: [{id: "14752uz5j2o", title: "Title", text: "text...", completed: false, time: "05.05.2025: 15:55"}],
     inputValue: '',
     inputValueTitle: '',
     editTaskId: null,

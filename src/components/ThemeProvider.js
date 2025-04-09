@@ -1,28 +1,37 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, useMemo } from 'react';
+import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 
 const ThemeContext = createContext();
+const STORAGE_THEME_KEY = 'RESUME_THEME';
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(JSON.parse(localStorage.getItem('SPA_THEME')) || 'Світла');
+  const [theme, setTheme] = useState(JSON.parse(localStorage.getItem(STORAGE_THEME_KEY)) || 'light');
 
   useEffect(() => {
-    document.body.classList.toggle('dark-theme', theme === 'Темна');
-    localStorage.setItem('SPA_THEME', JSON.stringify(theme));
+    localStorage.setItem(STORAGE_THEME_KEY, JSON.stringify(theme));
+    document.body.classList.toggle('dark-theme', theme === 'dark');
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'Світла' ? 'Темна' : 'Світла'));
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
+
+  const muiTheme = useMemo(() =>
+    createTheme({
+      palette: {
+        mode: theme === 'dark' ? 'dark' : 'light',
+      },
+    }), [theme]);
 
   const value = { theme, toggleTheme };
 
   return (
     <ThemeContext.Provider value={value}>
-      {children}
+      <MuiThemeProvider theme={muiTheme}>
+        {children}
+      </MuiThemeProvider>
     </ThemeContext.Provider>
   );
 };
 
-export const useTheme = () => {
-  return useContext(ThemeContext);
-};
+export const useTheme = () => useContext(ThemeContext);

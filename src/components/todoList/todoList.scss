@@ -79,7 +79,6 @@
 
 .todo-item {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     gap: 16px;
     padding: 16px;
@@ -120,6 +119,8 @@
 
 .done-item {
     cursor: pointer;
+    height: 12px;
+    width: 12px;
 }
 
 .check-bg {
@@ -157,23 +158,41 @@
     width: 40px;
 }
 
-.todo-item-controls,
-.todo-item-meta {
+.todo-item-controls-wrap {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: end;
     gap: 8px;
+    justify-content: space-between;
+    width: 104px;
+    flex-shrink: 0;
+}
+
+.todo-item-controls{
+    display: flex;
+    gap: 8px;
+}
+
+.edit-controls {
+    align-self: center;
 }
 
 .todo-item-title {
     font-weight: bold;
-    font-size: 20px;
+    padding-bottom: 4px;
+    display: inline-flex;
+    font-size: 22px;
+    border-bottom: 1px solid var(--gray-color);
 }
 
-.todo-item-meta {
-    padding-bottom: 4px;
-    align-items: end;
-    display: inline-flex;
-    border-bottom: 1px solid var(--gray-color);
+.todo-item-notification {
+    width: 100%;
+}
+
+.todo-item-time {
+    padding-top: 4px;
+    border-top: 1px solid var(--gray-color);
+    text-align: end;
 }
 
 .todo-item-time {

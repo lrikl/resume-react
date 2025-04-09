@@ -9,6 +9,7 @@ import store from './store/store.js';
 
 import ErrorBoundary from "./components/ErrorBoundary.js";
 import HeaderMenu, { menuItems } from './components/headerMenu/headerMenu.js';
+import Footer from './components/footer/footer.js';
 import { ThemeProvider } from './components/ThemeProvider.js';
 
 import './style.scss';
@@ -33,6 +34,7 @@ const RootComponent = () => {
                     <ThemeProvider>
                         <HeaderMenu />
                         <MainContent />
+                        <Footer/>
                     </ThemeProvider>
                 </HashRouter>
             </Provider>

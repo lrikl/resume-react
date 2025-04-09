@@ -64,7 +64,7 @@ export default () => {
         const day = getCurrentDay();
 
         if (!inputValueTitle || !inputValue) {
-            alert("треба заповнити усі текстові поля!");
+            alert("all text fields must be filled in!");
             return;
         }
 
@@ -108,12 +108,12 @@ export default () => {
 
     function saveEdit(id) {
         if (!inputHandleValue.trim() || !inputHandleValueTitle.trim()) {
-            alert("текстове поле не може бути порожнім");
+            alert("text field cannot be empty");
             return;
         }
 
         if (inputTextBefore === inputHandleValue.trim() && inputTitleBefore === inputHandleValueTitle.trim()) {
-            alert("для підтвердження потрібно внести зміни");
+            alert("changes are required to confirm");
             return;
         }
 
@@ -126,7 +126,7 @@ export default () => {
                 ...task, 
                 title: inputHandleValueTitle, 
                 text: inputHandleValue, 
-                time: `виправлено ${day} в ${hours}:${minute}`
+                time: `corrected ${day}: ${hours}:${minute}`
             } 
             : task
         );
@@ -147,7 +147,7 @@ export default () => {
     }
 
     function deleteTasks() {
-        if (confirm("Бажаєте видалити виділенні повідомлення?")) {
+        if (confirm("Do you want to delete the selected messages?")) {
             const newTodoTask =  todoTasksArr.filter(task => !task.completed);
             dispatch(setTodoTasksArr(newTodoTask));
         }
@@ -167,13 +167,13 @@ export default () => {
 
     return (
         <div className='todo-wrap'>
-            <h2>Список-задач</h2>
+            <h2>Todo-List</h2>
 
             <div className="todo-block">
                 {isCheckDelete && (
                     <div className='select-btn'>
                         <button className="delete-btn" onClick={deleteTasks}>🗑</button>
-                        <button className="check-all" onClick={checkAllTasks}>{allChecked ? "Зняти виділення" : "Виділити усе"}</button>
+                        <button className="check-all" onClick={checkAllTasks}>{allChecked ? "Remove selection" : "Select all"}</button>
                     </div>
                 )}
 
@@ -185,21 +185,21 @@ export default () => {
                         >
                             {editTaskId === task.id ? (
                                 <React.Fragment>
-                                    <span className='edit-text-remark'>Заголовок:</span>
+                                    <span className='edit-text-remark'>Title:</span>
                                     <input
                                         type="text"
                                         className="todo-input"
                                         value={inputHandleValueTitle}
                                         onChange={(e) => dispatch(setInputHandleValueTitle(e.target.value))}
                                     />
-                                    <span className='edit-text-remark'>Текст:</span>
+                                    <span className='edit-text-remark'>Text:</span>
                                     <textarea
                                         type="text"
                                         className="todo-input todo-textarea"
                                         value={inputHandleValue}
                                         onChange={(e) => dispatch(setInputHandleValue(e.target.value))}
                                     />
-                                    <div className='todo-item-controls'>
+                                    <div className='todo-item-controls edit-controls'>
                                         <button className='save-btn' onClick={() => saveEdit(task.id)}>✓</button>
                                         <button className='cancel-btn' onClick={() => dispatch(setEditTaskId(null))}>X</button>
                                     </div>
@@ -207,21 +207,22 @@ export default () => {
                             ) : (
                                 <React.Fragment>
                                     <div className='todo-item-notification'>
-                                        <div className="todo-item-meta">
-                                            <div className="todo-item-title">{task.title}</div>
-                                            <div className="todo-item-time">{task.time}</div>
-                                        </div>
+                                        <div className="todo-item-title">{task.title}</div>
                                         <div className="todo-item-text">{task.text}</div>
                                     </div>  
 
-                                    <div className='todo-item-controls'>
-                                        <button className='edit-btn' onClick={() => handleEdit(task.id)}></button>
-                                        <input
-                                            className='done-item'
-                                            type="checkbox"
-                                            checked={Boolean(task.completed)}
-                                            onChange={(event) => handleChange(task.id, event)}
-                                        />
+                                    <div className='todo-item-controls-wrap'>
+                                        <div className='todo-item-controls'> 
+                                            <button className='edit-btn' onClick={() => handleEdit(task.id)}></button>
+                                            <input
+                                                className='done-item'
+                                                type="checkbox"
+                                                checked={Boolean(task.completed)}
+                                                onChange={(event) => handleChange(task.id, event)}
+                                            />
+                                        </div>
+                                        
+                                        <div className="todo-item-time">{task.time}</div>
                                     </div>
                                 </React.Fragment>
                             )}
@@ -235,14 +236,14 @@ export default () => {
                         <input
                             type="text"
                             className="todo-input"
-                            placeholder="Заголовок..."
+                            placeholder="Title..."
                             value={inputValueTitle}
                             onChange={(e) => dispatch(setInputValueTitle(e.target.value))}
                         />
                         <textarea
                             type="text"
                             className="todo-input todo-textarea"
-                            placeholder="Текст..."
+                            placeholder="Text..."
                             value={inputValue}
                             onChange={(e) => dispatch(setInputValue(e.target.value))}
                         />
