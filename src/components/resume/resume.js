@@ -9,26 +9,23 @@ import {
   List,
   ListItem,
   ListItemText,
-  Divider,
   Box,
-  Link,
 } from "@mui/material";
-import { Email, Phone, GitHub, LinkedIn, Language } from "@mui/icons-material";
 
 export default () => {
 return (
     <Container maxWidth="md" sx={{ my: 5 }}>
         <Paper elevation={3} sx={{ p: 4, borderRadius: 4 }}>
         <Grid container spacing={3} alignItems="center">
-            <Grid item>
+            <Grid>
                 <Avatar
                     sx={{ width: 100, height: 100, bgcolor: "primary.main", fontSize: 32 }}
                 >
                     YT
                 </Avatar>
             </Grid>
-            <Grid item xs>
-                <Typography variant="h4" fontWeight={600} gutterBottom>
+            <Grid>
+                <Typography variant="h4" sx={{ lineHeight: 1 }} fontWeight={600} gutterBottom>
                     Yaroslav Tihomyrov
                 </Typography>
                 <Typography color="text.secondary">
@@ -40,7 +37,7 @@ return (
         <Box mt={3}>
             <Typography variant="h6">About Me</Typography>
             <Typography variant="body2" sx={{ p: 1 }}>
-                Seeking a position as an Trainee or Junior Front-End Developer. I have hands-on experience working as an Markup Developer at Rozetka, an online retailer, as well as non-commercial development experience with JavaScript and React. I am committed to continuous professional growth and in-depth learning of modern web development technologies and tools.
+                Seeking a position as a Trainee or Junior Front-End Developer. I have hands-on experience working as a Markup Developer at Rozetka, an online retailer, as well as non-commercial development experience with JavaScript and React. I am committed to continuous professional growth and in-depth learning of modern web development technologies and tools.
             </Typography>
         </Box>
 
@@ -48,7 +45,7 @@ return (
             <Typography variant="h6">Hard Skills</Typography>
             <Grid container spacing={1} sx={{ p: 1 }}>
                 {["HTML5", "CSS3", "JavaScript", "React", "Redux", "Git", "Webpack", "SASS/SCSS", "Photoshop", "Figma"].map(skill => (
-                    <Grid item key={skill}>
+                    <Grid key={skill}>
                     <Chip label={skill} color="primary" />
                     </Grid>
                 ))}
@@ -59,7 +56,7 @@ return (
             <Typography variant="h6">Soft Skills</Typography>
             <Grid container spacing={1} sx={{ p: 1 }}>
                 {["Teamwork", "Communication", "Time management", "Adaptability"].map(skill => (
-                    <Grid item key={skill}>
+                    <Grid key={skill}>
                     <Chip label={skill} variant="outlined" />
                     </Grid>
                 ))}

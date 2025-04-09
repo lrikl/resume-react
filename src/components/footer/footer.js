@@ -17,14 +17,14 @@ export default () => {
         <Box>
           <Typography variant="h6">  Contact Information: </Typography>
           <Grid container spacing={2} sx={{ p: 2 }}>
-            <Grid item xs={12} sm={6} md={3}>
-              <Chip icon={<Phone />} label="+38 (066) 001-25-54" variant="outlined" fullWidth />
+            <Grid>
+              <Chip icon={<Phone />} label="+38 (066) 001-25-54" variant="outlined" />
             </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <Chip icon={<Email />} label="tihomiirov@gmail.com" variant="outlined" fullWidth />
+            <Grid >
+              <Chip icon={<Email />} label="tihomiirov@gmail.com" variant="outlined" />
             </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <Chip icon={<GitHub />} label="GitHub" target="_blank" component="a" href="https://github.com/lrikl" clickable variant="outlined" fullWidth />
+            <Grid>
+              <Chip icon={<GitHub />} label="GitHub" target="_blank" component="a" href="https://github.com/lrikl" clickable variant="outlined" />
             </Grid>
           </Grid>
         </Box>

@@ -1,37 +1,26 @@
-import React, { createContext, useState, useContext, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
+import { selectTheme } from '../slices/themeSlice';
+import { useSelector} from 'react-redux';
 
-const ThemeContext = createContext();
-const STORAGE_THEME_KEY = 'RESUME_THEME';
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(JSON.parse(localStorage.getItem(STORAGE_THEME_KEY)) || 'light');
+  const theme = useSelector(selectTheme);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_THEME_KEY, JSON.stringify(theme));
     document.body.classList.toggle('dark-theme', theme === 'dark');
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
-  };
-
-  const muiTheme = useMemo(() =>
+  const muiTheme = useMemo(() => // useMemo запам'ятовує (мемоізує) результат виконання функцій (зараз createTheme(...)). useMemo виконає createTheme тільки один раз напочатку, а потім буде виконувати її тільки тоді, коли значення в масиві залежностей [theme] зміниться
     createTheme({
       palette: {
         mode: theme === 'dark' ? 'dark' : 'light',
       },
     }), [theme]);
 
-  const value = { theme, toggleTheme };
-
   return (
-    <ThemeContext.Provider value={value}>
-      <MuiThemeProvider theme={muiTheme}>
-        {children}
-      </MuiThemeProvider>
-    </ThemeContext.Provider>
+    <MuiThemeProvider theme={muiTheme}>
+      {children}
+    </MuiThemeProvider>
   );
 };
-
-export const useTheme = () => useContext(ThemeContext);
