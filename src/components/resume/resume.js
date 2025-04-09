@@ -18,11 +18,11 @@ return (
         <Paper elevation={3} sx={{ p: 4, borderRadius: 4 }}>
         <Grid container spacing={3} alignItems="center">
             <Grid>
-                <Avatar
-                    sx={{ width: 100, height: 100, bgcolor: "primary.main", fontSize: 32 }}
-                >
-                    YT
-                </Avatar>
+            <Avatar
+                alt="Yaroslav Tihomyrov"
+                src="./static/images/photo_2023-05-18_21-42-26.jpg"
+                sx={{ width: 100, height: 100 }}
+            />
             </Grid>
             <Grid>
                 <Typography variant="h4" sx={{ lineHeight: 1 }} fontWeight={600} gutterBottom>

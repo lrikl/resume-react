@@ -89,7 +89,26 @@ export default () => {
                                 fill="#ACB6C5"
                             />
                         </svg>
-                        <Switch checked={theme === 'dark'} onChange={handleThemeToggle} />
+                        <Switch
+                            checked={theme === 'dark'}
+                            onChange={handleThemeToggle}
+                            sx={{
+                                '& .MuiSwitch-thumb': {
+                                    backgroundColor: 'orange',
+                                },
+
+                                '& .MuiSwitch-track': {
+                                    backgroundColor: '#ccc', 
+                                    opacity: 0.7,        
+                                },
+
+                                '& .Mui-checked': {
+                                    '& .MuiSwitch-thumb': {
+                                        backgroundColor: '#fff', 
+                                    }
+                                },
+                            }}
+                        />
                     </Box>
                 </Toolbar>
             </AppBar>
