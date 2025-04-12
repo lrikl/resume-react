@@ -24,6 +24,14 @@ import {
     selectInputTextBefore,
     selectInputTitleBefore ,
 } from '../../slices/todoSlice';
+
+  import DeleteIcon from '@mui/icons-material/Delete';
+  import IconButton from '@mui/material/IconButton';
+  import EditIcon from '@mui/icons-material/Edit';
+  import Button from '@mui/material/Button';
+  import TextField from '@mui/material/TextField';
+  import Checkbox from '@mui/material/Checkbox';
+
 import "./todoList.scss";
 
 export default () => {
@@ -77,8 +85,8 @@ export default () => {
         };
 
         dispatch(setTodoTasksArr([...todoTasksArr, newTask]));
-        dispatch(setInputValue(''));
-        dispatch(setInputValueTitle(''));
+        dispatch(setInputValue(null));
+        dispatch(setInputValueTitle(null));
     }
 
     function handleChange(id, event) {
@@ -126,7 +134,7 @@ export default () => {
                 ...task, 
                 title: inputHandleValueTitle, 
                 text: inputHandleValue, 
-                time: `corrected ${day}: ${hours}:${minute}`
+                time: `corrected ${day} at ${hours}:${minute}`
             } 
             : task
         );
@@ -171,9 +179,21 @@ export default () => {
 
             <div className="todo-block">
                 {isCheckDelete && (
-                    <div className='select-btn'>
-                        <button className="delete-btn" onClick={deleteTasks}>🗑</button>
-                        <button className="check-all" onClick={checkAllTasks}>{allChecked ? "Remove selection" : "Select all"}</button>
+                    <div className='select-block'>
+                         <IconButton aria-label="delete">
+                            <DeleteIcon
+                                sx={{
+                                transition: '0.5s ease',
+                                '&:hover': {
+                                    transform: 'scale(1.05) rotate(15deg)', 
+                                    color: 'error.main',
+                                },
+                                }}
+
+                                onClick={deleteTasks}
+                            />
+                        </IconButton>
+                        <Button variant="contained" sx={{ width: '120px', minWidth: 'auto', fontSize: '8px', fontWeight: 'bold' }} onClick={checkAllTasks}>{allChecked ? "Remove selection" : "Select all"}</Button>
                     </div>
                 )}
 
@@ -185,23 +205,22 @@ export default () => {
                         >
                             {editTaskId === task.id ? (
                                 <React.Fragment>
-                                    <span className='edit-text-remark'>Title:</span>
-                                    <input
-                                        type="text"
-                                        className="todo-input"
+                                    <TextField
+                                        label="Title" 
                                         value={inputHandleValueTitle}
                                         onChange={(e) => dispatch(setInputHandleValueTitle(e.target.value))}
                                     />
-                                    <span className='edit-text-remark'>Text:</span>
-                                    <textarea
-                                        type="text"
-                                        className="todo-input todo-textarea"
+
+                                    <TextField
+                                        label="Text"
+                                        multiline
+                                        fullWidth
                                         value={inputHandleValue}
                                         onChange={(e) => dispatch(setInputHandleValue(e.target.value))}
                                     />
                                     <div className='todo-item-controls edit-controls'>
-                                        <button className='save-btn' onClick={() => saveEdit(task.id)}>✓</button>
-                                        <button className='cancel-btn' onClick={() => dispatch(setEditTaskId(null))}>X</button>
+                                        <Button variant="contained" size="small" sx={{width: '40px', minWidth: 'auto'}} onClick={() => saveEdit(task.id)}>✓</Button>
+                                        <Button variant="contained" size="small" sx={{width: '40px', minWidth: 'auto'}} onClick={() => dispatch(setEditTaskId(null))}>X</Button>
                                     </div>
                                 </React.Fragment>
                             ) : (
@@ -213,12 +232,21 @@ export default () => {
 
                                     <div className='todo-item-controls-wrap'>
                                         <div className='todo-item-controls'> 
-                                            <button className='edit-btn' onClick={() => handleEdit(task.id)}></button>
-                                            <input
-                                                className='done-item'
-                                                type="checkbox"
+                                            <EditIcon 
+                                                sx={{ 
+                                                    transform: 'scale(0.8)',
+                                                    cursor: 'pointer',
+                                                    transition: 'transform 0.5s ease-in-out',
+                                                    '&:hover': {
+                                                        transform: 'scale(0.9)',
+                                                    }
+                                                }} 
+                                                onClick={() => handleEdit(task.id)}
+                                            />
+                                            <Checkbox
+                                                size="small"
                                                 checked={Boolean(task.completed)}
-                                                onChange={(event) => handleChange(task.id, event)}
+                                                onChange={(event) => handleChange(task.id, event)} 
                                             />
                                         </div>
                                         
@@ -233,22 +261,22 @@ export default () => {
 
                 <div className="todo-add-block">
                     <div className='todo-add-inputs'>
-                        <input
-                            type="text"
-                            className="todo-input"
-                            placeholder="Title..."
-                            value={inputValueTitle}
+                        <TextField
+                            fullWidth 
+                            label="Title" 
+                            value={inputValueTitle ?? ''}
                             onChange={(e) => dispatch(setInputValueTitle(e.target.value))}
                         />
-                        <textarea
-                            type="text"
-                            className="todo-input todo-textarea"
-                            placeholder="Text..."
-                            value={inputValue}
+
+                        <TextField
+                            label="Text"
+                            multiline
+                            maxRows={4}
+                            value={inputValue ?? ''}
                             onChange={(e) => dispatch(setInputValue(e.target.value))}
                         />
                     </div>
-                    <button className="add-btn" onClick={addTodo}>Додати</button>
+                    <Button variant="contained" onClick={addTodo}>Add</Button>
                 </div>
             </div>
         </div>

@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo } from 'react';
-import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { selectTheme } from '../slices/themeSlice';
 import { useSelector} from 'react-redux';
 
 
-export const ThemeProvider = ({ children }) => {
+export default ({ children }) => {
   const theme = useSelector(selectTheme);
 
   useEffect(() => {
@@ -19,8 +19,8 @@ export const ThemeProvider = ({ children }) => {
     }), [theme]);
 
   return (
-    <MuiThemeProvider theme={muiTheme}>
+    <ThemeProvider theme={muiTheme}>
       {children}
-    </MuiThemeProvider>
+    </ThemeProvider>
   );
 };
