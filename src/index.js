@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import store from './store/store.js';
 
 import ErrorBoundary from "./components/ErrorBoundary.js";
-import HeaderMenu, { menuItems } from './components/headerMenu/headerMenu.js';
+import Header, { menuItems } from './components/header/header.js';
 import Footer from './components/footer/footer.js';
 import ThemeProvider from './components/ThemeProvider.js';
 
@@ -32,9 +32,9 @@ const RootComponent = () => {
             <Provider store={store}>
                 <HashRouter>
                     <ThemeProvider>
-                        <HeaderMenu />
+                        <Header />
                         <MainContent />
-                        <Footer/>
+                        <Footer />
                     </ThemeProvider>
                 </HashRouter>
             </Provider>

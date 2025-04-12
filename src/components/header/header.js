@@ -16,12 +16,10 @@ import {
 import TodoList from "../todoList/todoList.js";
 import Resume from '../resume/resume.js';
 
-import './headerMenu.scss';
-
 export const menuItems = [
     { path: '/', textNav: 'Resume', component: <Resume/> },
     { path: '/todoList', textNav: 'Todo-List', component: <TodoList/>},
-    { path: '/sw', textNav: 'SW', component: <div>SW</div>}
+    { path: '/sw', textNav: 'Star Wars', component: <div>SW</div>}
 ];
 
 export default () => {

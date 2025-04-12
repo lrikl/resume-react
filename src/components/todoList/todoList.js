@@ -25,12 +25,12 @@ import {
     selectInputTitleBefore ,
 } from '../../slices/todoSlice';
 
-  import DeleteIcon from '@mui/icons-material/Delete';
-  import IconButton from '@mui/material/IconButton';
-  import EditIcon from '@mui/icons-material/Edit';
-  import Button from '@mui/material/Button';
-  import TextField from '@mui/material/TextField';
-  import Checkbox from '@mui/material/Checkbox';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import EditIcon from '@mui/icons-material/Edit';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Checkbox from '@mui/material/Checkbox';
 
 import "./todoList.scss";
 
@@ -189,7 +189,6 @@ export default () => {
                                     color: 'error.main',
                                 },
                                 }}
-
                                 onClick={deleteTasks}
                             />
                         </IconButton>
