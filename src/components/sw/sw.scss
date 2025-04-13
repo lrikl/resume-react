@@ -1,11 +1,15 @@
-.sw-block ul {
-    list-style-type: disc;
+.sw-block {
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .sw-list ul {
     padding-left: 16px;
 }
 
+.sw-title {
+    text-align: center;
+}
 
 .sw-list {
     display: flex;
@@ -15,5 +19,23 @@
 
 .sw-list > li {
     margin-bottom: 16px;
-    width: 23%;
+    width: 30%;
+}
+
+.pagination {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+
+    button {
+        padding: 6px 10px;
+        border: 1px solid #ccc;
+        background: white;
+        cursor: pointer;
+
+        &.active {
+            background: #007bff;
+            color: white;
+        }
+    }
 }
