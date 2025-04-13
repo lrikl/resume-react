@@ -1,0 +1,19 @@
+.sw-block ul {
+    list-style-type: disc;
+}
+
+.sw-list ul {
+    padding-left: 16px;
+}
+
+
+.sw-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.sw-list > li {
+    margin-bottom: 16px;
+    width: 23%;
+}
