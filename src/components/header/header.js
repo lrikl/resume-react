@@ -34,7 +34,17 @@ export default () => {
     const currentPath = menuItems.find(item => item.path === location.pathname) ? location.pathname : false;
 
     return (
-        <Container maxWidth="lg" sx={{ my: 5 }} className='header'>
+        <Container 
+            maxWidth="lg" 
+            sx={{
+                my: 5,
+                display: 'flex',
+                flexDirection: 'row',
+                '@media (max-width:768px)': {
+                flexDirection: 'column',
+                },
+          }} 
+        >
             <AppBar 
                 elevation={3} 
                 position="static" 
@@ -48,7 +58,16 @@ export default () => {
 
                     <BottomNavigation
                         value={currentPath}
-                        sx={{ bgcolor: 'transparent', flexGrow: 1, justifyContent: 'flex-start' }}
+                        sx={{ 
+                            bgcolor: 'transparent', 
+                            flexGrow: 1, 
+                            justifyContent: 'flex-start',
+                            '@media (max-width:767px)': {
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            height: 'auto',
+                            padding: '8px'
+                        }}}
                         showLabels
                     >
                         {menuItems.map(({ path, textNav }) => (
@@ -72,9 +91,11 @@ export default () => {
                                     },
                                     
                                     '&:hover': {
-                                            backgroundColor: 'rgba(0, 0, 0, 0.04)' 
-                                    }
-                                }}
+                                        backgroundColor: 'rgba(0, 0, 0, 0.04)' 
+                                    },
+                                    '@media (max-width:767px)': {
+                                        padding: '16px'
+                                }}}
                             />
                         ))}
                     </BottomNavigation>
