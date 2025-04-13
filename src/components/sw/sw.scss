@@ -1,41 +1,49 @@
 .sw-block {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-.sw-list ul {
-    padding-left: 16px;
+.sw-list {
+    font-size: 14px;
+    margin-bottom: 40px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap
+}
+
+.sw-list {
+    padding-left: 8px;
+}
+
+.sw-list li {
+    margin-bottom: 4px;
 }
 
 .sw-title {
     text-align: center;
 }
 
-.sw-list {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+.sw-list-item {
+    width: 23%;
 }
 
-.sw-list > li {
-    margin-bottom: 16px;
-    width: 30%;
+.sw-list-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
-.pagination {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: center;
+.sw-films,
+.sw-starship {
+    padding-left: 16px;
+}
 
-    button {
-        padding: 6px 10px;
-        border: 1px solid #ccc;
-        background: white;
-        cursor: pointer;
+.sw-films > li,
+.sw-starship > li {
+    list-style-type: decimal;
+    margin-bottom: 4px;
+}
 
-        &.active {
-            background: #007bff;
-            color: white;
-        }
-    }
+.upload-btn {
+    margin: 0 auto;
 }
