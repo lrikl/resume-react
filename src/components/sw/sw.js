@@ -26,7 +26,20 @@ export default () => {
     async function fetchPersons(page = 1) {
         setIsLoading(true);
         try {
+
+            if (swPerson.count && page > Math.ceil(swPerson.count / 10)) {
+                setHasMore(false);
+                return;
+            }
+
             const resp = await fetch(`https://swapi.dev/api/people/?page=${page}`);
+
+            if (!resp.ok) {
+                console.warn(`Page ${page} not found (status ${resp.status})`);
+                setHasMore(false);
+                return;
+            }
+
             const data = await resp.json();
     
             setSwPerson(prev => {
@@ -78,6 +91,7 @@ export default () => {
     }
 
     async function fetchHomeworld(url) {
+        setIsLoading(true);
         const resp = await fetch(url);
         const data = await resp.json();
 
@@ -85,6 +99,7 @@ export default () => {
             ...prev,
             [url]: data.name,
         }));
+        setIsLoading(false);
     }
 
     useEffect(() => {
@@ -111,7 +126,6 @@ export default () => {
         
             if (scrollTop + clientHeight >= scrollHeight - 100) {
                 if (!isLoading && hasMore) {
-                    setIsLoading(true); 
                     setCurrentPage(prev => prev + 1);
                 }
             }
