@@ -26,18 +26,21 @@ export default () => {
     async function fetchPersons(page = 1) {
         setIsLoading(true);
         try {
+            let resp = null;
 
-            if (swPerson.count && page > Math.ceil(swPerson.count / 10)) {
-                setHasMore(false);
-                return;
-            }
+            try {
+                resp = await fetch(`https://swapi.dev/api/people/?page=${page}`);
 
-            const resp = await fetch(`https://swapi.dev/api/people/?page=${page}`);
+            } catch (error) {
+                console.warn(`Main mirror failed: ${error.message}`);
 
-            if (!resp.ok) {
-                console.warn(`Page ${page} not found (status ${resp.status})`);
-                setHasMore(false);
-                return;
+                resp = await fetch(`https://swapi.py4e.com/api/people/?page=${page}`);
+    
+                if (!resp.ok) {
+                    console.warn(`Backup mirror failed: ${resp.status}`);
+                    setHasMore(false);
+                    return;
+                }
             }
 
             const data = await resp.json();
@@ -116,23 +119,34 @@ export default () => {
         fetchPersons(currentPage);
     }, [currentPage]);
 
+    function debounce(func, delay) { // фільтрує частотні запити func спрацює тільки після паузи в delay
+        let timeout;
+        
+        return (...args) => {
+            if (timeout) clearTimeout(timeout);
+            timeout = setTimeout(() => { 
+                func(...args); // викликаємо функцію передаючи рестом усі аргументи вхідної функції
+            }, delay);
+        }; 
+    }
+
     useEffect(() => {
         if (!autoLoadMode) {
             return;
         }
 
-        const handleScroll = () => {
+        const debounceHandleScroll = debounce(() => {
             const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
         
             if (scrollTop + clientHeight >= scrollHeight - 100) {
                 if (!isLoading && hasMore) {
-                    setCurrentPage(prev => prev + 1);
+                    setCurrentPage(currentPage + 1); // повторні виклики: setCurrentPage(currentPage  => prev + 1) збільшать сторінку кілька разів, повторні виклики setCurrentPage(currentPage + 1) збільшать один раз
                 }
             }
-        };
+        }, 200);
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', debounceHandleScroll);
+        return () => window.removeEventListener('scroll', debounceHandleScroll);
     }, [autoLoadMode, isLoading, hasMore]);
 
     return (
