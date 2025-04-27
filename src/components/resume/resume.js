@@ -29,7 +29,7 @@ return (
                     Yaroslav Tihomyrov
                 </Typography>
                 <Typography color="text.secondary">
-                    Trainee Front-End Developer
+                    Junior Front-End Developer
                 </Typography>
             </Grid>
         </Grid>
@@ -87,7 +87,7 @@ return (
                 <ListItem sx={{ p: 0 }}>
                     <ListItemText
                     primary="Hillel IT School"
-                    secondary="Front-End Pro — Nov 2024 - Present"
+                    secondary="Front-End Pro — Nov 2024 - Apr 2025"
                     />
                 </ListItem>
             </List>
@@ -98,6 +98,7 @@ return (
             <Box sx={{ p: 1 }}>
                 <Typography variant="body2">Ukrainian - Native</Typography>
                 <Typography variant="body2">English – Pre-intermediate</Typography>
+                <Typography variant="body2">Russian - Advanced</Typography>
             </Box>
         </Box>
 
